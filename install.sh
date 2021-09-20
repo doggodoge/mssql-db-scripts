@@ -7,5 +7,5 @@ read -sp "Choose a password: " passvar
 echo $passvar > pass.txt
 
 echo "Creating MS SQL Install."
-docker run --cap-add SYS_PTRACE -e 'ACCEPT_EULA=1' -e 'MSSQL_SA_PASSWORD=$(cat pass.txt)' -p 1433:1433 --name mssql -d mcr.microsoft.com/azure-sql-edge
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=$(cat pass.txt)" -e "MSSQL_PID=Express" -p 1433:1433 --name mssql -d mcr.microsoft.com/mssql/server:2017-latest-ubuntu
 echo "Created and Started MS SQL Server with Password: '$(cat pass.txt)'."
